@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT4T - Language Bridge | Smart Translation API</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="gradient-bg">
+        <div class="gradient-1"></div>
+        <div class="gradient-2"></div>
+        <div class="gradient-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">IT4T</span>
+                    <span class="logo-sub">Language Bridge</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#translator" class="nav-link active">Translator</a>
+                <a href="#docs" class="nav-link">API Docs</a>
+                <a href="#status" class="nav-link">Status</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-robot"></i>
+                <span>AI-Powered Translation Engine</span>
+            </div>
+            <h1 class="hero-title">
+                Break Language Barriers
+                <span class="gradient-text">Instantly</span>
+            </h1>
+            <p class="hero-subtitle">
+                Translate your JSON language files to 50+ languages with enterprise-grade accuracy.
+                Get results in JSON or CSV format with blazing speed.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">&lt;2s</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Translator Section -->
+    <section class="translator-section" id="translator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Translation Studio</h2>
+                <p>Upload, configure, and translate in seconds</p>
+            </div>
+
+            <div class="translator-grid">
+                <!-- Left Panel - File Upload -->
+                <div class="panel upload-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload File</h3>
+                    </div>
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="fileInput" accept=".json" hidden>
+                        <div class="upload-content">
+                            <i class="fas fa-file-upload upload-icon"></i>
+                            <p class="upload-text">Drag & drop your JSON file here</p>
+                            <p class="upload-hint">or click to browse</p>
+                            <div class="file-info" id="fileInfo" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="fileName"></span>
+                                <button class="remove-file" onclick="removeFile()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="json-preview" id="jsonPreview" style="display: none;">
+                        <div class="preview-header">
+                            <i class="fas fa-code"></i>
+                            <span>JSON Preview</span>
+                            <button class="copy-btn" onclick="copyJSON()">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <pre id="jsonContent"></pre>
+                    </div>
+                </div>
+
+                <!-- Middle Panel - Configuration -->
+                <div class="panel config-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-sliders-h"></i>
+                        <h3>Configuration</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="code">
+                            <i class="fas fa-tag"></i>
+                            Translation Code
+                        </label>
+                        <input type="text" id="code" placeholder="e.g., shared, common, main" class="form-input">
+                        <small>Unique identifier for your translation batch</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="language">
+                            <i class="fas fa-globe"></i>
+                            Target Language
+                        </label>
+                        <div class="language-selector">
+                            <select id="language" class="form-select">
+                                <option value="">Select a language...</option>
+                                <optgroup label="Most Popular">
+                                    <option value="ar">🇸🇦 Arabic (العربية)</option>
+                                    <option value="es">🇪🇸 Spanish (Español)</option>
+                                    <option value="fr">🇫🇷 French (Français)</option>
+                                    <option value="de">🇩🇪 German (Deutsch)</option>
+                                    <option value="zh">🇨🇳 Chinese (中文)</option>
+                                    <option value="ja">🇯🇵 Japanese (日本語)</option>
+                                </optgroup>
+                                <optgroup label="European">
+                                    <option value="it">🇮🇹 Italian (Italiano)</option>
+                                    <option value="pt">🇵🇹 Portuguese (Português)</option>
+                                    <option value="ru">🇷🇺 Russian (Русский)</option>
+                                    <option value="nl">🇳🇱 Dutch (Nederlands)</option>
+                                    <option value="pl">🇵🇱 Polish (Polski)</option>
+                                    <option value="tr">🇹🇷 Turkish (Türkçe)</option>
+                                </optgroup>
+                                <optgroup label="Asian">
+                                    <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
+                                    <option value="ko">🇰🇷 Korean (한국어)</option>
+                                    <option value="th">🇹🇭 Thai (ไทย)</option>
+                                    <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
+                                </optgroup>
+                                <optgroup label="Middle Eastern">
+                                    <option value="he">🇮🇱 Hebrew (עברית)</option>
+                                    <option value="fa">🇮🇷 Persian (فارسی)</option>
+                                    <option value="ur">🇵🇰 Urdu (اردو)</option>
+                                </optgroup>
+                            </select>
+                            <div class="language-badge" id="selectedLanguage"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filetype">
+                            <i class="fas fa-file-alt"></i>
+                            Output Format
+                        </label>
+                        <div class="format-toggle">
+                            <button class="format-btn active" data-format="json">
+                                <i class="fab fa-js"></i>
+                                JSON
+                            </button>
+                            <button class="format-btn" data-format="csv">
+                                <i class="fas fa-table"></i>
+                                CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="api-key-toggle">
+                            <label for="apiKey">
+                                <i class="fas fa-key"></i>
+                                API Key
+                            </label>
+                            <button class="toggle-btn" id="toggleApiKey">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <input type="password" id="apiKey" placeholder="Enter your API key" class="form-input">
+                        <small>Get your API key from the admin panel</small>
+                    </div>
+
+                    <button class="translate-btn" id="translateBtn" disabled>
+                        <div class="btn-content">
+                            <i class="fas fa-magic"></i>
+                            <span>Translate Now</span>
+                        </div>
+                        <div class="btn-loader" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Translating...</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Right Panel - Results -->
+                <div class="panel results-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-chalkboard"></i>
+                        <h3>Results</h3>
+                        <div class="result-actions">
+                            <button class="action-btn" id="downloadBtn" style="display: none;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="action-btn" id="copyResultBtn" style="display: none;">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="results-content">
+                        <div class="empty-state" id="emptyState">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Ready to translate</h4>
+                            <p>Your translated content will appear here</p>
+                        </div>
+                        <div class="results-display" id="resultsDisplay" style="display: none;">
+                            <div class="results-stats" id="resultsStats"></div>
+                            <div class="results-table-wrapper">
+                                <table class="results-table" id="resultsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Translation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultsBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose IT4T?</h2>
+                <p>Enterprise-grade features for modern applications</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Average response time under 2 seconds with intelligent caching</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Reliable</h3>
+                    <p>API key authentication with rate limiting and file validation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-time Stats</h3>
+                    <p>Monitor usage, cache hits, and performance metrics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Dual Output</h3>
+                    <p>Get translations in JSON or CSV format as you prefer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main">IT4T</span>
+                            <span class="logo-sub">Solutions</span>
+                        </div>
+                    </div>
+                    <p>Innovative Team For Technology</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/it4t" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://twitter.com/it4t" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/it4t" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 IT4T Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
