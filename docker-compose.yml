@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - API_KEY=IT4T_SECRET_KEY_2024
+    volumes:
+      - ./uploads:/app/uploads
